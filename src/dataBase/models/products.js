@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Products extends Model {
     /**
@@ -11,9 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Products.hasOne(models.Type_products)
+      Products.belongsTo(models.type_products)
     }
   }
+
   Products.init({
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
