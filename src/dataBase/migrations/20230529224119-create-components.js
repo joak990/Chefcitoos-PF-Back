@@ -12,15 +12,22 @@ module.exports = {
       Components_type: {
         type: Sequelize.INTEGER,
         references : {
-          model : "components_types",
+          model : "components_categs",
           key : "id"
         }
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
+      },
+      isDeleted : {
+        type : Sequelize.BOOLEAN,
+        allowNull : false,
+        defaultValue : false
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       createdAt: {
         allowNull: false,

@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Products.belongsTo(models.type_products)
+      Products.belongsToMany(models.components_categ,{ 
+        through : "components_categ_products"
+      })
     }
   }
 
@@ -20,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
     image: DataTypes.STRING,
-    customizable: DataTypes.BOOLEAN
+    customizable: DataTypes.BOOLEAN,
+    type_product : DataTypes.STRING,
+    isDeleted : DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'products',

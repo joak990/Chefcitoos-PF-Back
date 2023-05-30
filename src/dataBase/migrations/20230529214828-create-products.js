@@ -10,23 +10,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull : false
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
-      type_products : {
-        type : Sequelize.INTEGER,
-        references : {
-          model : "type_products",
-          key : "id"
-        }
+      type_product : {
+        type : Sequelize.STRING,
+        allowNull : false
       },
       customizable: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull : false
+      },
+      isDeleted : {
+        type : Sequelize.BOOLEAN,
+        allowNull : false
       },
       createdAt: {
         allowNull: false,

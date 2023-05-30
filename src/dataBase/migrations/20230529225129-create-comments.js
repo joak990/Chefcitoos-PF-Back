@@ -24,11 +24,13 @@ module.exports = {
         }
       },
       content: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull : false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull : false
       },
       updatedAt: {
         allowNull: false,

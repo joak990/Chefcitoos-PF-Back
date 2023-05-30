@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   Components.init({
     Components_type: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    isDeleted : DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Components',

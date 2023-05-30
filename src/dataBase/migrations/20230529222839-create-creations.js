@@ -14,26 +14,32 @@ module.exports = {
         references : {
           model : "products",
           key : "id"
-        }
+        },
+        allowNull : false
       },
       users_id: {
         type: Sequelize.INTEGER,
         references : {
           model : "Users",
           key : "id"
-        }
+        },
+        allowNull : false
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       isVisible: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull : false
       },
       purchased_amount: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull : false
       },
       createdAt: {
         allowNull: false,

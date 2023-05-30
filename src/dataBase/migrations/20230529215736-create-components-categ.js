@@ -2,29 +2,15 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('component_type_products', {
+    await queryInterface.createTable('components_categs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      product_id: {
-        type: Sequelize.INTEGER,
-        references :{
-          model : "products",
-          key : "id"
-        }
-      },
-      component_type_id: {
-        type: Sequelize.INTEGER,
-        references : {
-          model : "components_types",
-          key : "id"
-        }
-      },
-      amount: {
-        type: Sequelize.INTEGER
+      name: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +23,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('component_type_products');
+    await queryInterface.dropTable('components_categs');
   }
 };
