@@ -8,7 +8,7 @@ server.use(bodyParser.json());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
   // Change for your port
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173"),
+  res.header("Access-Control-Allow-Origin", "database-1.cqawfiwiwudi.us-east-2.rds.amazonaws.com"),
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"

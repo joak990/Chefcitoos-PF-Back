@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Components.hasMany(models.components_type)
+      Components.hasMany(models.components_categ)
     }
   }
   Components.init({
