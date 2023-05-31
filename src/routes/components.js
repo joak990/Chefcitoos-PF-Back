@@ -4,7 +4,10 @@ const {
   removeComponent_type,
   getAllComponent_type,
   getOneComponent_type,
-  addComponent
+  addComponent,
+  getAllComponent,
+  excludeComponent,
+  removeComponent
 } = require("../controllers/components");
 
 // Components_categ entity
@@ -19,5 +22,11 @@ router.get("/categ/:id", getOneComponent_type);
 // Components entity
 
 router.post("/", addComponent);
+
+router.put('/:id', excludeComponent)
+
+router.get('/', getAllComponent)
+
+router.delete('/', removeComponent)
 
 module.exports = router;

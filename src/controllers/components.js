@@ -62,13 +62,71 @@ const getOneComponent_type = async ( req, res ) => {
 const { Components } = require('../dataBase/models')
 
 const addComponent = async ( req, res ) => {
-  let { description, name, Components_type } = req.body;
+
+  let { description, name, component_categId } = req.body;
   
   try {
-    /*const result = await Components.create({})
+    const result = await Components.create({
+      description : description,
+      name : name,
+      component_categId : component_categId
+    })
 
-    res.json(result).status(201)*/
-    console.log({ description, name, Components_type })
+    res.json(result).status(201)
+    console.log({ description, name, component_categId })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getAllComponent = async ( req, res ) => {
+  try {
+    const result = await Components.findAll({
+      where : {
+        isDeleted : false
+      },
+      include : "component"
+    },
+    )
+
+    res.json(result).status(200)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const excludeComponent = async ( req , res) => {
+
+  let { id } = req.params;
+
+  try {
+
+    if(!id) throw new Error('Debes especificar un id para borrar un componente')
+
+    const result = await Components.findByPk(id)
+
+    result.isDeleted = result.isDeleted ? false : true
+
+    result.save()
+
+    res.json(result).status(200)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const removeComponent = async ( req, res) => {
+  let { id } = req.params;
+  
+  try {
+    if(!id) throw new Error('Necesitar especificar el id de el componente')
+    const result = await Components.destroy({
+      where : {
+        id : id
+      }
+    })
+
+    res.json(result).status(200)
   } catch (error) {
     console.log(error)
   }
@@ -79,5 +137,8 @@ module.exports = {
   getAllComponent_type,
   removeComponent_type,
   getOneComponent_type,
-  addComponent
+  addComponent,
+  getAllComponent,
+  excludeComponent,
+  removeComponent
 };

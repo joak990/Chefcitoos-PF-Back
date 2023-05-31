@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Components_categ_products.hasMany(models.products)
     }
   }
+  
   Components_categ_products.init({
     product_id: DataTypes.INTEGER,
     Componente_categ_id: DataTypes.INTEGER,
