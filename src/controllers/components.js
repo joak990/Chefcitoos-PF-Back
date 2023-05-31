@@ -1,5 +1,7 @@
 const { components_categ } = require("../dataBase/models");
 
+// Components_categ logic
+
 const addComponent_type = async (req, res) => {
   let { name } = req.body;
 
@@ -55,9 +57,27 @@ const getOneComponent_type = async ( req, res ) => {
     }
 }
 
+// Components logic
+
+const { Components } = require('../dataBase/models')
+
+const addComponent = async ( req, res ) => {
+  let { description, name, Components_type } = req.body;
+  
+  try {
+    /*const result = await Components.create({})
+
+    res.json(result).status(201)*/
+    console.log({ description, name, Components_type })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   addComponent_type,
   getAllComponent_type,
   removeComponent_type,
-  getOneComponent_type
+  getOneComponent_type,
+  addComponent
 };
