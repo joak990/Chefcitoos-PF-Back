@@ -11,7 +11,7 @@ const createUser = async (user) => {
         })
         return newUser.dataValues;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         throw new Error (error);
     }
 }
