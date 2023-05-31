@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     customizable: DataTypes.BOOLEAN,
     type_product : DataTypes.STRING,
-    isDeleted : DataTypes.BOOLEAN
+    isDeleted : DataTypes.BOOLEAN,
+    description : DataTypes.STRING
   }, {
     sequelize,
     modelName: 'products',
