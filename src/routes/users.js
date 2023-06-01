@@ -4,6 +4,7 @@ const router = server.Router();
 const createUser = require('../controllers/createUser');
 const deleteUser = require('../controllers/deleteUser');
 const changeIsDeletedValue = require('../controllers/changeIsDeletedValueUser');
+const validateUser = require('../controllers/validateUser');
 
 router.post('/', async (req, res) => {
     try {
@@ -31,6 +32,17 @@ router.put('/:id', async (req, res) => {
         const { isDeleted } = req.body;
         const changeValue = await changeIsDeletedValue(id, isDeleted);
         res.status(200).send(changeValue);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+})
+
+router.post('/validate', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const validate = await validateUser(email, password)
+        console.log(validate);
+        res.status(200).send(validate);
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
