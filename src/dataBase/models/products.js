@@ -13,20 +13,20 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Products.hasMany(models.Order_product)
-      Products.belongsToMany(models.components_categ,{ 
-        through : "components_categ_products"
-      })
+      Products.hasMany(models.components_categ)
     }
   }
 
   Products.init({
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
+    elements: DataTypes.TEXT,
     price: DataTypes.INTEGER,
     image: DataTypes.STRING,
     customizable: DataTypes.BOOLEAN,
     type_product : DataTypes.STRING,
-    isDeleted : DataTypes.BOOLEAN
+    isDeleted : DataTypes.BOOLEAN,
+    description : DataTypes.STRING
   }, {
     sequelize,
     modelName: 'products',

@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Components_type: {
+      component_categId: {
         type: Sequelize.INTEGER,
         references : {
           model : "components_categs",
