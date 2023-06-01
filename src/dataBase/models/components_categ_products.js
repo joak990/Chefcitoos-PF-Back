@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Components_categ_products.belongsTo(models.components_categ)
-      Components_categ_products.hasMany(models.products)
+      Components_categ_products.belongsTo(models.products)
     }
   }
   
