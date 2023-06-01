@@ -7,8 +7,8 @@ const changeIsDeletedValue = require('../controllers/changeIsDeletedValueUser');
 
 router.post('/', async (req, res) => {
     try {
-        const { name, email, password, type, isDeleted } = req.body;
-        const newUser = await createUser({ name, email, password, type, isDeleted })
+        const { id, name, email, password, type, isDeleted, uid } = req.body;
+        const newUser = await createUser({ id, name, email, password, type, isDeleted, uid })
         res.status(200).send(newUser);
     } catch (error) {
         res.status(400).send({ error: error.message });
