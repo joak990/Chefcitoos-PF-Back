@@ -3,7 +3,7 @@ const router = server.Router();
 
 const createUser = require('../controllers/createUser');
 const deleteUser = require('../controllers/deleteUser');
-const changeIsDeletedValue = require('../controllers/changeIsDeletedValue');
+const changeIsDeletedValue = require('../controllers/changeIsDeletedValueUser');
 
 router.post('/', async (req, res) => {
     try {
