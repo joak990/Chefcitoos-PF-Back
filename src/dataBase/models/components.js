@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Components.hasMany(models.components_type)
+      Components.hasMany(models.components_categ)
     }
   }
+
   Components.init({
-    Components_type: DataTypes.INTEGER,
+    component_categId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     isDeleted : DataTypes.BOOLEAN

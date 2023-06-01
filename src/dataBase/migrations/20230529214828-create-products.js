@@ -13,6 +13,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull : false
       },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      elements: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
       price: {
         type: Sequelize.INTEGER,
         allowNull : false
@@ -22,7 +30,7 @@ module.exports = {
         allowNull : false
       },
       type_product : {
-        type : Sequelize.STRING,
+        type: DataTypes.ENUM('hamburguesa', 'perro_caliente', 'sandwich', 'burrito', 'bebidas', 'otros_platos'),
         allowNull : false
       },
       customizable: {
