@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Creation_component.hasMany(models.Components)
-      Creation_component.hasMany(models.Creations)
+      Creation_component.belongsTo(models.Components)
+      Creation_component.belongsTo(models.Creations)
     }
   }
   Creation_component.init({
