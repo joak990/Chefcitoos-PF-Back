@@ -26,7 +26,7 @@ module.exports = {
         allowNull : false
       },
       type_product : {
-        type : Sequelize.STRING,
+        type: DataTypes.ENUM('hamburguesa', 'perro_caliente', 'sandwich', 'burrito', 'bebidas', 'otros_platos'),
         allowNull : false
       },
       customizable: {
