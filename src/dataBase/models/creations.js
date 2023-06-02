@@ -13,12 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Creations.belongsTo(models.Users,
         {
-        foreignKey: "users_id",
-        as:"Users"
-      }
+          foreignKey: "users_id",
+          as: "Users"
+        }
       )
-      Creations.belongsTo(models.products,{
+      Creations.belongsTo(models.products, {
         foreignKey: "product_id"
+      })
+      Creations.hasMany(models.Assessment, {
+        foreignKey: "creation_id"
       })
     }
   }
@@ -28,8 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
     image: DataTypes.STRING,
-    isVisible: DataTypes.BOOLEAN,
-    purchased_amount: DataTypes.INTEGER
+    isPosted: DataTypes.BOOLEAN,
+    purchased_amount: DataTypes.INTEGER,
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Creations',

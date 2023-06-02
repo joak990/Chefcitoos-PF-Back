@@ -8,8 +8,9 @@ const createCreation = async (creation) => {
             name: creation.name,
             price: creation.price,
             image: creation.image,
-            isVisible: creation.isVisible,
-            purchased_amount: creation.purchased_amount
+            isPosted: creation.isPosted,
+            purchased_amount: creation.purchased_amount,
+            isDeleted: creation.isDeleted
         })
         return newCreation.dataValues;
     } catch (error) {
