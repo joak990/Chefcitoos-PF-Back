@@ -23,11 +23,17 @@ module.exports = {
           model : "Users",
           key : "id"
         },
-        allowNull : false
+        allowNull : false,
+        onDelete: "cascade"
       },
       name: {
         type: Sequelize.STRING,
         allowNull : false
+      },
+      isDeleted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
       },
       price: {
         type: Sequelize.INTEGER,
@@ -37,7 +43,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull : false
       },
-      isVisible: {
+      isPosted: {
         type: Sequelize.BOOLEAN,
         allowNull : false
       },

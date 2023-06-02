@@ -11,15 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Components.hasMany(models.components_categ)
+      Components.belongsTo(models.components_categ, { foreignKey: "component_categ_id", as: "component" })
     }
   }
 
   Components.init({
-    component_categId: DataTypes.INTEGER,
+    component_categ_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    isDeleted : DataTypes.BOOLEAN
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Components',
