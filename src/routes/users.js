@@ -9,8 +9,8 @@ const validateUser = require('../controllers/validateUser');
 router.post('/', async (req, res) => {
     try {
         const { id, name, email, password, type, isDeleted, uid } = req.body;
-        const newUser = await createUser({ id, name, email, password, type, isDeleted, uid })
-        res.status(200).send(newUser);
+        const validate = await createUser({ id, name, email, password, type, isDeleted, uid })
+        res.status(200).send(validate);
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
