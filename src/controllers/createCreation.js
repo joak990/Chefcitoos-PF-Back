@@ -10,8 +10,9 @@ const createCreation = async (creation) => {
             image: creation.image,
             isPosted: creation.isPosted,
             purchased_amount: creation.purchased_amount,
-            isDeleted: creation.isDeleted
+            isDeleted: creation.isDeleted,
         })
+        newCreation.addComponents(creation.components);
         return newCreation.dataValues;
     } catch (error) {
         throw new Error(error);

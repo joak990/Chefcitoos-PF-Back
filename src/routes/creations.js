@@ -8,8 +8,8 @@ const getCreationsById = require('../controllers/getCreationByUserId')
 
 router.post('/', async (req, res) => {
     try {
-        const { product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted } = req.body;
-        const newCreation = await createCreation({ product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted })
+        const { product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted, components } = req.body;
+        const newCreation = await createCreation({ product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted, components })
         res.status(200).send(newCreation);
     } catch (error) {
         res.status(400).send({ error: error.message });
