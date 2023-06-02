@@ -43,9 +43,13 @@ router.post('/validate', async (req, res) => {
         const validCredentials = await validateUser(email, password);
 
         if (validCredentials) {
-            res.status(200).json({ success: true });
+            res.status(200).json({
+                validCredentials,
+                email,
+                password
+            });
         } else {
-            res.status(200).json({ success: false, message: "Invalid credentials" });
+            res.status(200).json(validCredentials);
         }
     } catch (error) {
         res.status(400).json({ success: false, error: error.message });
