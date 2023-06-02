@@ -8,13 +8,10 @@ const validateUser = async (email, password) => {
         })
         if(userEmail){
             if(userEmail.dataValues.password === password){
-                // console.log('trueeeeeeeeeeeee')
-                return true;
+                return userEmail.dataValues.id;
             }
-            // console.log('contraseña incorrectaaaaaaaa')
             return false;
         }
-        // console.log('no se encontroooooooooo')
         return false;
     } catch (error) {
         throw new Error(error);

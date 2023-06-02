@@ -44,9 +44,8 @@ router.post('/validate', async (req, res) => {
 
         if (validCredentials) {
             res.status(200).json({
-                validCredentials,
                 email,
-                password
+                id: validCredentials
             });
         } else {
             res.status(200).json(validCredentials);
