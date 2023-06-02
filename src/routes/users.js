@@ -40,11 +40,16 @@ router.put('/:id', async (req, res) => {
 router.post('/validate', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const validate = await validateUser(email, password)
-        console.log(validate);
-        res.status(200).send(validate);
+        const validCredentials = await validateUser(email, password);
+
+        if (validCredentials) {
+            res.status(200).json({ success: true });
+        } else {
+            res.status(200).json({ success: false, message: "Invalid credentials" });
+        }
     } catch (error) {
-        res.status(400).send({ error: error.message });
+        res.status(400).json({ success: false, error: error.message });
     }
+
 })
 module.exports = router;
