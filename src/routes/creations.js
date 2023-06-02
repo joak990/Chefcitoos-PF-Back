@@ -4,6 +4,7 @@ const router = server.Router();
 const createCreation = require('../controllers/createCreation');
 const deleteCreation = require('../controllers/deleteCreation');
 const getCreations = require('../controllers/getCreations');
+const getCreationsById = require('../controllers/getCreationByUserId')
 
 router.post('/', async (req, res) => {
     try {
@@ -27,8 +28,20 @@ router.delete('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const getCreation = await getCreations()
+        const { filterName } = req.query;
+        const getCreation = await getCreations(filterName)
         res.status(200).send(getCreation);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        const { type } = req.query;
+        const { id } = req.params;
+        const creationById = await getCreationsById(id, type)
+        res.status(200).send(creationById);
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
