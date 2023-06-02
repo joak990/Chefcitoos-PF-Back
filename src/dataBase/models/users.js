@@ -7,9 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     
     static associate(models) {
       Users.hasMany(models.Creations,{
-        foreignKey: "users_id"
+        foreignKey: "users_id",
+        onDelete: "CASCADE"
       })
-      // define association here
+      Users.hasMany(models.Assessment, {
+        foreignKey: "user_id"
+      })
     }
   }
   Users.init({

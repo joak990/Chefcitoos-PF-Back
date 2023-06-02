@@ -11,8 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Assessment.belongsTo(models.Users)
-      Assessment.belongsTo(models.Creations)
+      Assessment.belongsTo(models.Users, {
+        foreignKey: "user_id"
+      })
+      Assessment.belongsTo(models.Creations, {
+        foreignKey: "creation_id"
+      })
     }
   }
   Assessment.init({
