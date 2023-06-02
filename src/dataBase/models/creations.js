@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       Creations.hasMany(models.Assessment, {
         foreignKey: "creation_id"
       })
+      Creations.belongsToMany(models.Components, {through: "Creation_component", foreignKey: "creation_id"});
     }
   }
   Creations.init({
