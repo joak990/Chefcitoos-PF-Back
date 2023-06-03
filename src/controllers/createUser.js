@@ -3,12 +3,14 @@ const { Users } = require('../dataBase/models');
 const createUser = async (user) => {
 
     // const userDb = await Users.findByPk(user.id)
+    let root = '';
+    user.uid ? root = 'google' : root = 'register';
 
     const userDb = await Users.findOne({
         where: { email: user.email }
     })
     // console.log(userDb)
-    if (userDb) return {id: userDb.id, email: userDb.email, name: userDb.name};
+    if (userDb) return {id: userDb.id, email: userDb.email, name: userDb.name, root: root};
 
     // if (user.uid) {
     //     const userUid = await Users.findOne({
@@ -26,6 +28,7 @@ const createUser = async (user) => {
             isDeleted: user.isDeleted,
             uid: user.uid
         })
+        newUser.dataValues.root = root;
         return newUser.dataValues;
     } catch (error) {
         // console.log(error);
