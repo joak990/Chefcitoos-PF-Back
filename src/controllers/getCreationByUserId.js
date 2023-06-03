@@ -2,19 +2,18 @@ const { Creations } = require('../dataBase/models');
 const { Users } = require('../dataBase/models');
 const { products } = require('../dataBase/models');
 const { Creation_component } = require('../dataBase/models');
+const { Components } = require('../dataBase/models');
 
 const getCreationsByUserId = async (id, type) => {
     try {
-        let aux;
+        let aux = {};
+        
         if (type === "creation") {
-            aux = await Creations.findByPk(id, {
+            const temp = {};
+
+            const creationPromise = Creations.findByPk(id, {
                 order: [['createdAt', 'DESC']],
                 include: [
-                    // {
-                    //     model: Creation_component,
-                    //     // as: 'Usecomponents_categ',
-                    //     attributes: ['name']
-                    // },
                     {
                         model: Users,
                         as: 'Users',
@@ -26,6 +25,26 @@ const getCreationsByUserId = async (id, type) => {
                     }
                 ]
             });
+
+            const auxCreationComponentPromise = Creation_component.findAll({
+                where: {
+                    creation_id: id
+                },
+                include: [
+                    {
+                        model: Components,
+                        attributes: ['name']
+                    }
+                ]
+            });
+
+            const [creationResult, auxCreationComponentResult] = await Promise.all([creationPromise, auxCreationComponentPromise]);
+
+            const componentNames = auxCreationComponentResult.map(item => item.Component.name);
+            temp.componentNames = componentNames;
+
+            aux = { ...creationResult.toJSON(), ...temp };
+            
         } else if (type === "user") {
             aux = await Creations.findAll({
                 where: {
