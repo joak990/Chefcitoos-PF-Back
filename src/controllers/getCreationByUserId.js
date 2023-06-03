@@ -1,6 +1,7 @@
 const { Creations } = require('../dataBase/models');
 const { Users } = require('../dataBase/models');
 const { products } = require('../dataBase/models');
+const { Creation_component } = require('../dataBase/models');
 
 const getCreationsByUserId = async (id, type) => {
     try {
@@ -9,6 +10,11 @@ const getCreationsByUserId = async (id, type) => {
             aux = await Creations.findByPk(id, {
                 order: [['createdAt', 'DESC']],
                 include: [
+                    // {
+                    //     model: Creation_component,
+                    //     // as: 'Usecomponents_categ',
+                    //     attributes: ['name']
+                    // },
                     {
                         model: Users,
                         as: 'Users',
