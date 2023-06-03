@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     users_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT,
     isPosted: DataTypes.BOOLEAN,
     purchased_amount: DataTypes.INTEGER,
     isDeleted: DataTypes.BOOLEAN
