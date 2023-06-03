@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   Assessment.init({
     creation_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    content: DataTypes.STRING
+    content: DataTypes.STRING,
+    vote: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Assessment',
