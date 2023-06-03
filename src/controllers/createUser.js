@@ -8,7 +8,7 @@ const createUser = async (user) => {
         where: { email: user.email }
     })
     // console.log(userDb)
-    if (userDb) return {id: userDb.id, email: userDb.email};
+    if (userDb) return {id: userDb.id, email: userDb.email, name: userDb.name};
 
     // if (user.uid) {
     //     const userUid = await Users.findOne({

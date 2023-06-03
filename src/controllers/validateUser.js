@@ -8,7 +8,11 @@ const validateUser = async (email, password) => {
         })
         if(userEmail){
             if(userEmail.dataValues.password === password){
-                return userEmail.dataValues.id;
+                return {
+                    id: userEmail.dataValues.id, 
+                    email: userEmail.dataValues.email, 
+                    name: userEmail.dataValues.name
+                };
             }
             return false;
         }

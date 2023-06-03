@@ -9,8 +9,8 @@ const validateUser = require('../controllers/validateUser');
 router.post('/', async (req, res) => {
     try {
         const { id, name, email, password, type, isDeleted, uid } = req.body;
-        const validate = await createUser({ id, name, email, password, type, isDeleted, uid })
-        res.status(200).send(validate);
+        const dataUser = await createUser({ id, name, email, password, type, isDeleted, uid })
+        res.status(200).send(dataUser);
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
@@ -40,15 +40,12 @@ router.put('/:id', async (req, res) => {
 router.post('/validate', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const validCredentials = await validateUser(email, password);
+        const dataUser = await validateUser(email, password);
 
-        if (validCredentials) {
-            res.status(200).json({
-                email,
-                id: validCredentials
-            });
+        if (dataUser) {
+            res.status(200).json(dataUser);
         } else {
-            res.status(200).json(validCredentials);
+            res.status(200).json(dataUser); //false
         }
     } catch (error) {
         res.status(400).json({ success: false, error: error.message });
