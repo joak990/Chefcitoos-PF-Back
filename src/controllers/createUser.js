@@ -10,7 +10,7 @@ const createUser = async (user) => {
         where: { email: user.email }
     })
     // console.log(userDb)
-    if (userDb) return {id: userDb.id, email: userDb.email, name: userDb.name, root: root};
+    if (userDb) return {id: userDb.id, email: userDb.email, name: userDb.name, root: root, duplicated: true};
 
     // if (user.uid) {
     //     const userUid = await Users.findOne({
@@ -29,6 +29,7 @@ const createUser = async (user) => {
             uid: user.uid
         })
         newUser.dataValues.root = root;
+        newUser.dataValues.duplicated = false;
         return newUser.dataValues;
     } catch (error) {
         // console.log(error);
