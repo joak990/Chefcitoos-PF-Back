@@ -120,42 +120,46 @@ const getCreations = async (filterName) => {
             });
             aux = creationPosted.map(el => el.dataValues)
             return aux
-        } else if (filterName === "priceDesc") {
-            const creationPosted = await Creations.findAll({
-                order: [['price', 'DESC']],
-                include: [
-                    {
-                        model: Users,
-                        as: 'Users',
-                        attributes: ['name']
-                    },
-                    {
-                        model: products,
-                        attributes: ['name']
-                    }
-                ]
-            });
-            aux = creationPosted.map(el => el.dataValues)
-            return aux
-        } else if (filterName === "priceAsc") {
-            const creationPosted = await Creations.findAll({
-                order: [['price', 'ASC']],
-                include: [
-                    {
-                        model: Users,
-                        as: 'Users',
-                        attributes: ['name']
-                    },
-                    {
-                        model: products,
-                        attributes: ['name']
-                    }
-                ]
-            });
-            aux = creationPosted.map(el => el.dataValues)
-            return aux
-        }
+        } 
+        // else if (filterName === "priceDesc") {
+        //     const creationPosted = await Creations.findAll({
+        //         order: [['price', 'DESC']],
+        //         include: [
+        //             {
+        //                 model: Users,
+        //                 as: 'Users',
+        //                 attributes: ['name']
+        //             },
+        //             {
+        //                 model: products,
+        //                 attributes: ['name']
+        //             }
+        //         ]
+        //     });
+        //     aux = creationPosted.map(el => el.dataValues)
+        //     return aux
+        // } else if (filterName === "priceAsc") {
+        //     const creationPosted = await Creations.findAll({
+        //         order: [['price', 'ASC']],
+        //         include: [
+        //             {
+        //                 model: Users,
+        //                 as: 'Users',
+        //                 attributes: ['name']
+        //             },
+        //             {
+        //                 model: products,
+        //                 attributes: ['name']
+        //             }
+        //         ]
+        //     });
+        //     aux = creationPosted.map(el => el.dataValues)
+        //     return aux
+        // }
         const allCreations = await Creations.findAll({
+            where: {
+                isPosted: true
+            },
             order: [['createdAt', 'DESC']],
             include: [
                 {
