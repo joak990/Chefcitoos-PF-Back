@@ -7,7 +7,9 @@ const searchBarAllCreations = async (productName) => {
     try {
         const creationPromise = Creations.findAll({
             where: {
-                name: productName
+                name: {
+                    [Op.iLike]: `%${productName}%`
+                }
             },
             order: [['createdAt', 'DESC']],
             include: [
@@ -32,7 +34,9 @@ const searchBarUserCreations = async (props) => {
     try {
         const creationPromise = await Creations.findAll({
             where: {
-                name: props.productName,
+                name: {
+                    [Op.iLike]: `%${props.productName}%`
+                },
                 users_id: props.id,
             },
             order: [['createdAt', 'DESC']],
@@ -56,4 +60,4 @@ const searchBarUserCreations = async (props) => {
 }
 
 
-module.exports = {searchBarAllCreations, searchBarUserCreations};
+module.exports = { searchBarAllCreations, searchBarUserCreations };
