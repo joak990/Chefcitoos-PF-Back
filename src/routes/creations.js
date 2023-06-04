@@ -26,7 +26,7 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.get('/', async (req, res) => {
+router.get('/posts', async (req, res) => {
     try {
         const { filterName } = req.query;
         const getCreation = await getCreations(filterName)
@@ -36,11 +36,11 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/myCreations/:id', async (req, res) => {
     try {
-        const { type } = req.query;
+        const { type, filterName } = req.query;
         const { id } = req.params;
-        const creationById = await getCreationsById(id, type)
+        const creationById = await getCreationsById(id, type, filterName)
         res.status(200).send(creationById);
     } catch (error) {
         res.status(400).send({ error: error.message })
