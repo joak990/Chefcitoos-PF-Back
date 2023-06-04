@@ -1,13 +1,15 @@
+const { Op } = require('sequelize');
+
 const { Creations } = require('../dataBase/models');
 const { Users } = require('../dataBase/models');
 const { products } = require('../dataBase/models');
 const { Creation_component } = require('../dataBase/models');
 const { Components } = require('../dataBase/models');
 
-const getCreationsByUserId = async (id, type) => {
+const getCreationsByUserId = async (id, type, filterName) => {
     try {
         let aux = {};
-        
+        // Creation detail
         if (type === "creation") {
             const temp = {};
 
@@ -44,8 +46,104 @@ const getCreationsByUserId = async (id, type) => {
             temp.componentNames = componentNames;
 
             aux = { ...creationResult.toJSON(), ...temp };
-            
+            // User Creations
         } else if (type === "user") {
+
+            if (filterName === 'typeProductBurgers') {
+                const creationPosted = await Creations.findAll({
+                    where: {
+                        product_id: {
+                            [Op.in]: [1, 2, 3, 4]
+                        },
+                        users_id: id
+                    },
+                    order: [['createdAt', 'DESC']],
+                    include: [
+                        {
+                            model: Users,
+                            as: 'Users',
+                            attributes: ['name']
+                        },
+                        {
+                            model: products,
+                            attributes: ['name']
+                        }
+                    ]
+                });
+                aux = creationPosted.map(el => el.dataValues)
+                return aux;
+            } else if (filterName === 'typeProductHotDogs') {
+                const creationPosted = await Creations.findAll({
+                    where: {
+                        product_id: {
+                            [Op.in]: [5, 6, 7, 8]
+                        },
+                        users_id: id
+                    },
+                    order: [['createdAt', 'DESC']],
+                    include: [
+                        {
+                            model: Users,
+                            as: 'Users',
+                            attributes: ['name']
+                        },
+                        {
+                            model: products,
+                            attributes: ['name']
+                        }
+                    ]
+                });
+                aux = creationPosted.map(el => el.dataValues)
+                return aux
+            } else if (filterName === "typeProductSandwitch") {
+                const creationPosted = await Creations.findAll({
+                    where: {
+                        product_id: {
+                            [Op.in]: [12, 13, 14, 15]
+                        },
+                        users_id: id
+                    },
+                    order: [['createdAt', 'DESC']],
+                    include: [
+                        {
+                            model: Users,
+                            as: 'Users',
+                            attributes: ['name']
+                        },
+                        {
+                            model: products,
+                            attributes: ['name']
+                        }
+                    ]
+                });
+                aux = creationPosted.map(el => el.dataValues)
+                return aux
+            } else if (filterName === "typeProductBurrito") {
+                const creationPosted = await Creations.findAll({
+                    where: {
+                        product_id: {
+                            [Op.in]: [9, 10, 11]
+                        },
+                        users_id: id
+                    },
+                    order: [['createdAt', 'DESC']],
+                    include: [
+                        {
+                            model: Users,
+                            as: 'Users',
+                            attributes: ['name']
+                        },
+                        {
+                            model: products,
+                            attributes: ['name']
+                        }
+                    ]
+                });
+                aux = creationPosted.map(el => el.dataValues)
+                return aux
+
+            }
+
             aux = await Creations.findAll({
                 where: {
                     users_id: id,
