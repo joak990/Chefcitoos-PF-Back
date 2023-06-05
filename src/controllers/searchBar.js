@@ -1,6 +1,7 @@
 const { Creations } = require('../dataBase/models');
 const { Users } = require('../dataBase/models');
 const { products } = require('../dataBase/models');
+const { Op } = require('sequelize');
 
 
 const searchBarAllCreations = async (productName) => {
@@ -9,7 +10,8 @@ const searchBarAllCreations = async (productName) => {
             where: {
                 name: {
                     [Op.iLike]: `%${productName}%`
-                }
+                },
+                isPosted: true
             },
             order: [['createdAt', 'DESC']],
             include: [
