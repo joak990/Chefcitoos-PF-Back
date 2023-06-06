@@ -29,7 +29,7 @@ module.exports = {
       },
       vote: {
         type: Sequelize.INTEGER,
-        allowNull: true
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
