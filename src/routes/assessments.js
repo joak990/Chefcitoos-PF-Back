@@ -1,7 +1,8 @@
 const server = require('express');
 const router = server.Router();
 
-const newAssessments = require('../controllers/createAssessments')
+const newAssessments = require('../controllers/createAssessments');
+const verifyAssessment = require('../controllers/verifyAssessment');
 
 router.post('/', async (req, res) => {
     try {
@@ -32,5 +33,15 @@ router.post('/', async (req, res) => {
 //         res.status(400).send({ error: error.message })
 //     }
 // })
+
+router.get('/validateAssessment', async (req, res) => {
+    try {
+        const { creation_id, user_id } = req.body;
+        const isCreated = await verifyAssessment({creation_id, user_id});
+        res.status(200).send(isCreated);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+})
 
 module.exports = router;
