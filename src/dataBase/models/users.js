@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "users_id",
         onDelete: "CASCADE"
       })
-      Users.hasMany(models.Assessment, {
+      Users.hasMany(models.Assessments, {
         foreignKey: "user_id"
       })
     }

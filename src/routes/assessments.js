@@ -1,13 +1,13 @@
 const server = require('express');
 const router = server.Router();
 
-const newAssessment = require('../controllers/createAssessment')
+const newAssessments = require('../controllers/createAssessments')
 
 router.post('/', async (req, res) => {
     try {
         const { creation_id, user_id, content, vote } = req.body;
-        const createAssessment = await newAssessment({ creation_id, user_id, content, vote })
-        res.status(200).send(createAssessment);
+        const createAssessments = await newAssessments({ creation_id, user_id, content, vote })
+        res.status(200).send(createAssessments);
     } catch (error) {
         console.log(error)
         res.status(400).send({ error: error.message });
