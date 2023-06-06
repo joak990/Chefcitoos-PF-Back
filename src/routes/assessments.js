@@ -3,6 +3,7 @@ const router = server.Router();
 
 const newAssessments = require('../controllers/createAssessments');
 const verifyAssessment = require('../controllers/verifyAssessment');
+const getComments = require('../controllers/getComments')
 
 router.post('/', async (req, res) => {
     try {
@@ -25,14 +26,15 @@ router.post('/', async (req, res) => {
 //     }
 // })
 
-// router.get('/', async (req, res) => {
-//     try {
-//         const getCreation = await getCreations()
-//         res.status(200).send(getCreation);
-//     } catch (error) {
-//         res.status(400).send({ error: error.message })
-//     }
-// })
+router.get('/comments/:id', async (req, res) => {
+    try {
+        const id = req.params;
+        const comments = await getComments(id)
+        res.status(200).send(comments);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+})
 
 router.get('/validateAssessment', async (req, res) => {
     try {
