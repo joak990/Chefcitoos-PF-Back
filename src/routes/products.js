@@ -4,7 +4,7 @@ const router = server.Router();
 const createProduct = require('../controllers/createProduct');
 const deleteProduct = require('../controllers/deleteProduct');
 const getAllProducts = require('../controllers/getProducts');
-const changeDeleteValue = require('../controllers/changeIsDeletedValueProduct');
+const changeIsDeletedValueProduct = require('../controllers/changeIsDeletedValueProduct');
 
 router.post('/', async (req, res) => {
     try {
@@ -40,7 +40,7 @@ router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { isDeleted } = req.body;
-        const changeValue = await changeDeleteValue(id, isDeleted);
+        const changeValue = await changeIsDeletedValueProduct(id, isDeleted);
         res.status(200).send(changeValue);
     } catch (error) {
         res.status(400).send({ error: error.message });
