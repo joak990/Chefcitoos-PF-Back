@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     creation_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
     content: DataTypes.TEXT,
-    vote: DataTypes.INTEGER,
+    vote: DataTypes.FLOAT,
     img: DataTypes.TEXT
   }, {
     sequelize,
