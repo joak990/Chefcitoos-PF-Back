@@ -11,30 +11,34 @@ module.exports = {
       },
       creation_id: {
         type: Sequelize.INTEGER,
-        references : {
-          model : "Creations",
-          key : "id"
+        references: {
+          model: "Creations",
+          key: "id"
         }
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references : {
-          model : "Users",
-          key : "id"
+        references: {
+          model: "Users",
+          key: "id"
         }
       },
       content: {
         type: Sequelize.TEXT,
-        allowNull : false
+        allowNull: false
       },
       vote: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      img: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        allowNull : false
+        allowNull: false
       },
       updatedAt: {
         allowNull: false,

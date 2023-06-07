@@ -5,6 +5,7 @@ const { Users } = require('../dataBase/models');
 const { products } = require('../dataBase/models');
 const { Creation_component } = require('../dataBase/models');
 const { Components } = require('../dataBase/models');
+const { components_categ } = require('../dataBase/models')
 
 const getCreationsByUserId = async (id, type, filterName) => {
     try {
@@ -35,11 +36,22 @@ const getCreationsByUserId = async (id, type, filterName) => {
                 include: [
                     {
                         model: Components,
-                        attributes: ['name']
+                        attributes: ['name'],
+                        include: [
+                            {
+                                model: components_categ,
+                                // as: 'component',
+                                attributes: ['name']
+                            }
+                        ]
                     }
                 ]
             });
-
+            const al = await auxCreationComponentPromise;
+            const categ = [];
+            al.map(el => categ.push(el.dataValues.Component.dataValues.components_categ.dataValues.name));
+            // console.log(al[0].dataValues.Component.dataValues.name)
+            console.log(categ)
             const [creationResult, auxCreationComponentResult] = await Promise.all([creationPromise, auxCreationComponentPromise]);
 
             const componentNames = auxCreationComponentResult.map(item => item.Component.name);

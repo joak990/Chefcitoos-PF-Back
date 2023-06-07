@@ -7,8 +7,8 @@ const getComments = require('../controllers/getComments')
 
 router.post('/', async (req, res) => {
     try {
-        const { creation_id, user_id, content, vote } = req.body;
-        const createAssessments = await newAssessments({ creation_id, user_id, content, vote })
+        const { creation_id, user_id, content, vote, img } = req.body;
+        const createAssessments = await newAssessments({ creation_id, user_id, content, vote, img })
         res.status(200).send(createAssessments);
     } catch (error) {
         console.log(error)

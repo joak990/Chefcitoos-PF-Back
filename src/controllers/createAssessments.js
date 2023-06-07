@@ -6,7 +6,8 @@ const createAssessments = async (Assmnts) => {
             creation_id: Assmnts.creation_id,
             user_id: Assmnts.user_id,
             content: Assmnts.content,
-            vote: Assmnts.vote
+            vote: Assmnts.vote,
+            img: Assmnts.img
         })
         return newAssessments.dataValues;
     } catch (error) {
