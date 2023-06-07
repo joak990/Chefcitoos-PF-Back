@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false
       },
       vote: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       img: {
