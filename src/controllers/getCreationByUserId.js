@@ -40,7 +40,6 @@ const getCreationsByUserId = async (id, type, filterName) => {
                         include: [
                             {
                                 model: components_categ,
-                                // as: 'component',
                                 attributes: ['name']
                             }
                         ]
@@ -50,12 +49,26 @@ const getCreationsByUserId = async (id, type, filterName) => {
             const al = await auxCreationComponentPromise;
             const categ = [];
             al.map(el => categ.push(el.dataValues.Component.dataValues.components_categ.dataValues.name));
-            // console.log(al[0].dataValues.Component.dataValues.name)
             console.log(categ)
             const [creationResult, auxCreationComponentResult] = await Promise.all([creationPromise, auxCreationComponentPromise]);
 
             const componentNames = auxCreationComponentResult.map(item => item.Component.name);
-            temp.componentNames = componentNames;
+            
+            const result = {};
+            
+            for (let i = 0; i < categ.length; i++) {
+                const category = categ[i];
+                const componentName = componentNames[i];
+                
+                if (result[category]) {
+                    result[category].push(componentName);
+                } else {
+                    result[category] = [componentName];
+                }
+            }
+            
+            temp.components = result;
+            console.log("result -> ", result)
 
             aux = { ...creationResult.toJSON(), ...temp };
             // User Creations
