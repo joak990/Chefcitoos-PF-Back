@@ -11,8 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Creations.belongsTo(models.Users,
-        {
+      Creations.hasMany(models.Creations_order, {
+        foreignKey: "id"
+      })
+      Creations.belongsTo(models.Users, {
           foreignKey: "users_id",
           as: "Users"
         }
@@ -23,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       Creations.hasMany(models.Assessments, {
         foreignKey: "creation_id"
       })
-      Creations.belongsToMany(models.Components, {through: "Creation_component", foreignKey: "creation_id"});
+      Creations.belongsToMany(models.Components, { through: "Creation_component", foreignKey: "creation_id" });
     }
   }
   Creations.init({
