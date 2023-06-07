@@ -11,14 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Orders.belongsTo(models.Users)
+      Orders.belongsTo(models.Creations_order, {
+        foreignKey: "CreationsOrderId"
+      })
+      Orders.belongsTo(models.Order_product, {
+        foreignKey: "OrderProductId"
+      })
+      Orders.belongsTo(models.Users, {
+        foreignKey: "users_id"
+      })
     }
   }
   Orders.init({
     users_id: DataTypes.INTEGER,
     total_price: DataTypes.INTEGER,
     state: DataTypes.STRING,
-    date: DataTypes.STRING
+    date: DataTypes.STRING,
+    OrderProductId: DataTypes.INTEGER,
+    CreationsOrderId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Orders',
