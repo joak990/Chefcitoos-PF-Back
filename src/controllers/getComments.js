@@ -9,7 +9,7 @@ const getComments = async (data) => {
             where: {
                 creation_id: data.id,
             },
-            attributes: ['content', 'createdAt', [Sequelize.literal('"User"."name"'), 'userName']],
+            attributes: ['content', 'createdAt', 'img', [Sequelize.literal('"User"."name"'), 'userName']],
             include: {                
                     model: Users,
                     attributes: []                
