@@ -11,8 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Creations.belongsTo(models.Users,
-        {
+      Creations.hasMany(models.Creations_order, {
+        foreignKey: "id"
+      })
+      Creations.belongsTo(models.Users, {
           foreignKey: "users_id",
           as: "Users"
         }
@@ -20,9 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       Creations.belongsTo(models.products, {
         foreignKey: "product_id"
       })
-      Creations.hasMany(models.Assessment, {
+      Creations.hasMany(models.Assessments, {
         foreignKey: "creation_id"
       })
+      Creations.belongsToMany(models.Components, { through: "Creation_component", foreignKey: "creation_id" });
     }
   }
   Creations.init({
@@ -30,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     users_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT,
     isPosted: DataTypes.BOOLEAN,
     purchased_amount: DataTypes.INTEGER,
     isDeleted: DataTypes.BOOLEAN

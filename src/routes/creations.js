@@ -4,11 +4,12 @@ const router = server.Router();
 const createCreation = require('../controllers/createCreation');
 const deleteCreation = require('../controllers/deleteCreation');
 const getCreations = require('../controllers/getCreations');
+const getCreationsById = require('../controllers/getCreationByUserId')
 
 router.post('/', async (req, res) => {
     try {
-        const { product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted } = req.body;
-        const newCreation = await createCreation({ product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted })
+        const { product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted, components } = req.body;
+        const newCreation = await createCreation({ product_id, users_id, name, price, image, isPosted, purchased_amount, isDeleted, components })
         res.status(200).send(newCreation);
     } catch (error) {
         res.status(400).send({ error: error.message });
@@ -25,10 +26,22 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.get('/', async (req, res) => {
+router.get('/posts', async (req, res) => {
     try {
-        const getCreation = await getCreations()
+        const { filterName } = req.query;
+        const getCreation = await getCreations(filterName)
         res.status(200).send(getCreation);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+})
+
+router.get('/myCreations/:id', async (req, res) => {
+    try {
+        const { type, filterName } = req.query;
+        const { id } = req.params;
+        const creationById = await getCreationsById(id, type, filterName)
+        res.status(200).send(creationById);
     } catch (error) {
         res.status(400).send({ error: error.message })
     }

@@ -1,20 +1,28 @@
 const { Users } = require('../dataBase/models');
 
-const validateUser = async (email, password) => {
+const validateUser = async (email, password, type) => {
     // console.log(user)
-    try {
+    try {        
         const userEmail = await Users.findOne({
             where: { email:email }
         })
         if(userEmail){
             if(userEmail.dataValues.password === password){
-                // console.log('trueeeeeeeeeeeee')
-                return true;
+                if(type === 'admin'){
+                    return {
+                        validate: true,
+                        id: userEmail.dataValues.id
+                    }
+                } else if (type === 'user'){
+                    return {
+                        id: userEmail.dataValues.id, 
+                        email: userEmail.dataValues.email, 
+                        name: userEmail.dataValues.name
+                    };                    
+                }
             }
-            // console.log('contraseña incorrectaaaaaaaa')
             return false;
         }
-        // console.log('no se encontroooooooooo')
         return false;
     } catch (error) {
         throw new Error(error);
