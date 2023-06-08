@@ -36,11 +36,10 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/change/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { isDeleted } = req.body;
-        const changeValue = await changeIsDeletedValueProduct(id, isDeleted);
+        const changeValue = await changeIsDeletedValueProduct(id);
         res.status(200).send(changeValue);
     } catch (error) {
         res.status(400).send({ error: error.message });
