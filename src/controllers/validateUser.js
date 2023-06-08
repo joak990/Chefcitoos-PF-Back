@@ -13,7 +13,7 @@ const validateUser = async (email, password, type) => {
                         validate: true,
                         id: userEmail.dataValues.id
                     }
-                } else if (type === 'user'){
+                } else/*  if (type === 'user') */{
                     return {
                         id: userEmail.dataValues.id, 
                         email: userEmail.dataValues.email, 
