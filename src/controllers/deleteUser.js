@@ -1,10 +1,49 @@
 const { Users } = require('../dataBase/models');
+const { Creations } = require('../dataBase/models');
+const { Creation_component } = require('../dataBase/models');
+const { Assessments } = require('../dataBase/models');
 
 const deleteUser = async (id) => {
     try {
-        const user = await Users.findByPk(id);
-        const aux = { ...user.dataValues };
-        await user.destroy();
+        const userId = await Users.findByPk(id, {
+            attributes: ['id']
+        })
+        
+        await Assessments.destroy({
+            where: {
+                user_id: id
+            }
+        })
+        const allCreationsByUser = await Creations.findAll({
+            where: {
+                users_id: userId.id
+            },
+            attributes: ['id']
+        })
+
+        let allCreationId = [];
+        allCreationsByUser.map(obj => allCreationId.push(obj.id));
+
+        await Promise.all(allCreationId.map(async el => {
+            await Assessments.destroy({
+                where: {
+                    creation_id: el
+                }
+            })
+            await Creation_component.destroy({
+                where: {
+                    creation_id: el
+                }
+            })
+        }))
+
+
+        await userId.destroy();
+
+        // const aux = { ...user.dataValues };
+        return true;
+
+        // await user.destroy();
         return aux;
     } catch (error) {
         throw new Error(error);
