@@ -9,7 +9,10 @@ const validateUser = async (email, password, type) => {
         if(userEmail){
             if(userEmail.dataValues.password === password){
                 if(type === 'admin'){
-                    return true;
+                    return {
+                        validate: true,
+                        id: userEmail.dataValues.id
+                    }
                 } else if (type === 'user'){
                     return {
                         id: userEmail.dataValues.id, 
