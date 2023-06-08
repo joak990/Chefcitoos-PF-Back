@@ -5,6 +5,7 @@ const createUser = require('../controllers/createUser');
 const deleteUser = require('../controllers/deleteUser');
 const changeIsDeletedValue = require('../controllers/changeIsDeletedValueUser');
 const validateUser = require('../controllers/validateUser');
+const getAllUsers = require('../controllers/getUsers');
 
 router.post('/', async (req, res) => {
     try {
@@ -51,5 +52,15 @@ router.post('/validate', async (req, res) => {
         res.status(400).json({ success: false, error: error.message });
     }
 
+})
+
+
+router.get('/', async (req, res) => {
+    try {
+        const allUsers = await getAllUsers()
+        res.status(200).send(allUsers);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
 })
 module.exports = router;
