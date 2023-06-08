@@ -39,8 +39,8 @@ router.put('/:id', async (req, res) => {
 
 router.post('/validate', async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const dataUser = await validateUser(email, password);
+        const { email, password, type } = req.body;
+        const dataUser = await validateUser(email, password, type);
 
         if (dataUser) {
             res.status(200).json(dataUser);

@@ -1,18 +1,22 @@
 const { Users } = require('../dataBase/models');
 
-const validateUser = async (email, password) => {
+const validateUser = async (email, password, type) => {
     // console.log(user)
-    try {
+    try {        
         const userEmail = await Users.findOne({
             where: { email:email }
         })
         if(userEmail){
             if(userEmail.dataValues.password === password){
-                return {
-                    id: userEmail.dataValues.id, 
-                    email: userEmail.dataValues.email, 
-                    name: userEmail.dataValues.name
-                };
+                if(type === 'admin'){
+                    return true;
+                } else if (type === 'user'){
+                    return {
+                        id: userEmail.dataValues.id, 
+                        email: userEmail.dataValues.email, 
+                        name: userEmail.dataValues.name
+                    };                    
+                }
             }
             return false;
         }
