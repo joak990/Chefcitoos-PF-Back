@@ -34,8 +34,8 @@ const createOrder = async (order) => {
             total_price: order.total_price,
             state: order.state,
             date: order.date,
-            OrderProductId: order.OrderProductId,
-            CreationsOrderId: order.CreationsOrderId
+            // OrderProductId: order.OrderProductId,
+            // CreationsOrderId: order.CreationsOrderId
         })
         return newOrder.dataValues;
     } catch (error) {

@@ -23,7 +23,7 @@ module.exports = {
           key : "id"
         }
       },
-      amount: {
+      quantity: {
         type: Sequelize.INTEGER,
         allowNull : false
       },
