@@ -4,6 +4,8 @@ const router = server.Router();
 const newAssessments = require('../controllers/createAssessments');
 const verifyAssessment = require('../controllers/verifyAssessment');
 const getComments = require('../controllers/getComments')
+const getCommentsByCreations = require('../controllers/getCommentsByCreation')
+
 
 router.post('/', async (req, res) => {
     try {
@@ -46,5 +48,17 @@ router.get('/validateAssessment', async (req, res) => {
         res.status(400).send({ error: error.message });
     }
 })
+
+router.get('/:id', async (req, res) => {
+    try {
+        const id = req.params;
+        const isCreated = await getCommentsByCreations(id);
+        res.status(200).send(isCreated);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+})
+
+
 
 module.exports = router;
