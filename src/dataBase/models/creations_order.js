@@ -14,15 +14,15 @@ module.exports = (sequelize, DataTypes) => {
       Creations_order.belongsTo(models.Creations, {
         foreignKey: "creation_id"
       })
-      Creations_order.hasMany(models.Orders, {
-        foreignKey: "CreationsOrderId"
+      Creations_order.belongsTo(models.Orders, {
+        foreignKey: "order_id"
       })
     }
   }
   Creations_order.init({
     creation_id: DataTypes.INTEGER,
     order_id: DataTypes.INTEGER,
-    amount: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Creations_order',
