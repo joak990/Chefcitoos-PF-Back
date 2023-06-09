@@ -42,9 +42,7 @@ const deleteUser = async (id) => {
 
         // const aux = { ...user.dataValues };
         return true;
-
-        // await user.destroy();
-        return aux;
+        // await user.destroy(); 
     } catch (error) {
         throw new Error(error);
     }
