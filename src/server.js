@@ -4,6 +4,15 @@ const bodyParser = require("body-parser");
 
 const server = express();
 
+
+// SDK de Mercado Pago
+const mercadopago = require("mercadopago");
+// Agrega credenciales
+mercadopago.configure({
+  access_token: "TEST-5960402983418929-060820-969d789c69c20e1c6d8095148628460a-274974881",
+});
+
+
 server.use(bodyParser.json());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
