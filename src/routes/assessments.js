@@ -5,7 +5,7 @@ const newAssessments = require('../controllers/createAssessments');
 const verifyAssessment = require('../controllers/verifyAssessment');
 const getComments = require('../controllers/getComments')
 const getCommentsByCreations = require('../controllers/getCommentsByCreation')
-
+const deleteComments = require('../controllers/deleteComments')
 
 router.post('/', async (req, res) => {
     try {
@@ -58,6 +58,19 @@ router.get('/:id', async (req, res) => {
         res.status(400).send({ error: error.message });
     }
 })
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params;
+        console.log(id);
+        const commentsDelete = await deleteComments(id);
+        res.status(200).send(commentsDelete);
+    } catch (error) {
+        console.log('error1', error);
+        res.status(400).send({ error: error.message });
+    }
+})
+
 
 
 
