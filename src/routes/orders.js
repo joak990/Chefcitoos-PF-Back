@@ -5,8 +5,8 @@ const {createOrder, orderCreations, orderProducts, getOrderById, updateState } =
 
 router.post('/', async (req, res) => {
     try {
-        const { users_id, total_price, state, date, OrderProductId, CreationsOrderId } = req.body;
-        const newOrder = await createOrder({ users_id, total_price, state, date, OrderProductId, CreationsOrderId })
+        const { users_id, total_price, state, date, creations, products} = req.body;
+        const newOrder = await createOrder({ users_id, total_price, state, date, creations, products})
         res.status(200).send(newOrder);
     } catch (error) {
         res.status(400).send({ error: error.message });

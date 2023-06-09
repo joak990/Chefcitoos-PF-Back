@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       Creations_order.belongsTo(models.Creations, {
         foreignKey: "creation_id"
       })
-      Creations_order.hasMany(models.Orders, {
-        foreignKey: "CreationsOrderId"
+      Creations_order.belongsTo(models.Orders, {
+        foreignKey: "order_id"
       })
     }
   }
