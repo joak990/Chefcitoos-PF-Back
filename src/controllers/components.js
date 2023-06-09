@@ -85,7 +85,7 @@ const getAllComponent = async ( req, res ) => {
       where : {
         isDeleted : false
       },
-      include : "component"
+      // include : "component"
     },
     )
 
