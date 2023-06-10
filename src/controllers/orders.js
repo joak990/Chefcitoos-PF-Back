@@ -4,13 +4,14 @@ const { Orders, Order_product } = require('../dataBase/models');
 const { Creations_order } = require('../dataBase/models');
 const createCreation = require('./createCreation')
 
-const updateState = async (id, value) => {
+const updateState = async (id, state, confirmation_code) => {
     try {
         const orderById = await Orders.findByPk(id);
         if (!orderById) {
             return 'Orden no encontrada'
         }
-        orderById.state = value;
+        orderById.state = state;
+        orderById.confirmation_code = confirmation_code
         await orderById.save();
         return `Valor del estado actualizado a: ${value} correctamente`
     } catch (error) {
