@@ -6,6 +6,6 @@ server.get("/", (req, res) => {
     res.send ({ msg: "Hola Chefcitoos"})
   })
 
-server.listen(process.env.PORT, () => {
-    console.log("Listening in port", process.env.PORT)
+server.listen(3001, () => {
+    console.log("Listening in port", 3001)
 })
