@@ -6,24 +6,24 @@ const { USERNAME,
 
 module.exports = {
   "development": {
-    "username": USERNAME,
-    "password": PASSWORD,
-    "database": DATABASE,
-    "host": HOST,
+    "username": "awschefcitoos",
+    "password": "chefcitoosdb",
+    "database": "chefcitoos",
+    "host": "database-1.cqawfiwiwudi.us-east-2.rds.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {
-    "username": USERNAME,
-    "password": PASSWORD,
-    "database": DATABASE,
-    "host": HOST,
+    "username": "awschefcitoos",
+    "password": "chefcitoosdb",
+    "database": "chefcitoos",
+    "host": "database-1.cqawfiwiwudi.us-east-2.rds.amazonaws.com",
     "dialect": "postgres"
   },
   "production": {
-    "username": USERNAME,
-    "password": PASSWORD,
-    "database": DATABASE,
-    "host": HOST,
+    "username": "awschefcitoos",
+    "password": "chefcitoosdb",
+    "database": "chefcitoos",
+    "host": "database-1.cqawfiwiwudi.us-east-2.rds.amazonaws.com",
     "dialect": "postgres"
   }
 }
