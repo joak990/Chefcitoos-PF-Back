@@ -46,8 +46,8 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { value } = req.body;
-        const creationById = await updateState(id, value)
+        const { state, confirmation_code } = req.body;
+        const creationById = await updateState(id, state, confirmation_code)
         res.status(200).send(creationById);
     } catch (error) {
         res.status(400).send({ error: error.message })
