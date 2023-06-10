@@ -60,7 +60,17 @@ router.get('/', async (req, res) => {
         const allUsers = await getAllUsers()
         res.status(200).send(allUsers);
     } catch (error) {
-        res.status(400).send({ error: error.message })
+        res.status(400).send({ error: error.message });
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userById = await getuserById(id);
+        res.status(200).send(userById);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
     }
 })
 module.exports = router;
