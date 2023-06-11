@@ -6,6 +6,22 @@ const deleteUser = require('../controllers/deleteUser');
 const changeIsDeletedValue = require('../controllers/changeIsDeletedValueUser');
 const validateUser = require('../controllers/validateUser');
 const getAllUsers = require('../controllers/getUsers');
+const editAddressUser = require('../controllers/updateAddressUser')
+const getuserById = require('../controllers/getuserById')
+
+router.put('/newAddress/:id', async (req, res) => {
+    try {
+        const { newAddress } = req.body;
+        const { id } = req.params;
+       
+        const changeValue = await editAddressUser(id, newAddress);
+        res.status(200).send(changeValue);
+        console.log(newAddress)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({ error: error.message });
+    }
+})
 
 router.post('/', async (req, res) => {
     try {
@@ -73,4 +89,5 @@ router.get('/:id', async (req, res) => {
         res.status(400).send({ error: error.message });
     }
 })
+
 module.exports = router;
