@@ -81,6 +81,7 @@ const createOrder = async (order) => {
                         isPosted: creation.isPosted,
                         purchased_amount: creation.quantity,
                         isDeleted: creation.isDeleted,
+                        components: creation.components,
                     })
                     creationsArr.push({
                         id: newCreation.id,
