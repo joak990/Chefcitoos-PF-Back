@@ -4,8 +4,8 @@ const mercadopago = require('mercadopago');
 const { updateState } = require('../controllers/orders');
 
 router.post("/create_preference", (req, res) => {
-  const urlFrontend = "https://ec0a-2a0c-5a81-5212-ed00-3497-e3b6-4db1-433a.ngrok-free.app"
-  const urlBackend = "https://67fe-2a0c-5a81-5212-ed00-20b4-94b6-3215-e48e.ngrok-free.app"
+  const urlFrontend = "https://chefcitoos.vercel.app"
+  const urlBackend = "https://chefcitoos-pf-back.up.railway.app"
     console.log('sosososos')
     let preference = {
       items: [ 
