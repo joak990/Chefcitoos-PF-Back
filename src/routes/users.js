@@ -8,6 +8,7 @@ const validateUser = require('../controllers/validateUser');
 const getAllUsers = require('../controllers/getUsers');
 const editAddressUser = require('../controllers/updateAddressUser')
 const getuserById = require('../controllers/getuserById')
+const updateTypeUser = require('../controllers/updateUserType')
 
 router.put('/newAddress/:id', async (req, res) => {
     try {
@@ -16,9 +17,20 @@ router.put('/newAddress/:id', async (req, res) => {
        
         const changeValue = await editAddressUser(id, newAddress);
         res.status(200).send(changeValue);
-        console.log(newAddress)
     } catch (error) {
-        console.log(error)
+   
+        res.status(400).send({ error: error.message });
+    }
+})
+
+router.put('/userType/:id', async (req, res) => {
+    try {
+        const { userType } = req.body;
+        const { id } = req.params;
+        const changeValue = await updateTypeUser(id, userType);
+        res.status(200).send(changeValue);
+    } catch (error) {
+  
         res.status(400).send({ error: error.message });
     }
 })
