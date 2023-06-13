@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT,
     vote: DataTypes.FLOAT,
     img: DataTypes.TEXT,
-    isDeleted : DataTypes.BOOLEAN
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Assessments',
