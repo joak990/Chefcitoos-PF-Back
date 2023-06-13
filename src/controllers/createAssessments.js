@@ -20,7 +20,7 @@ const createAssessments = async (Assmnts) => {
         const allVotes = votesByCreation.map(el => el.dataValues.vote)
         const sum = allVotes.reduce((a, b) => a + b, 0);
         const average = sum / allVotes.length;
-        const roundedAverage = average.toFixed(1);
+        const roundedAverage = Math.round(average * 2) / 2;
         const creation = await Creations.findByPk(Assmnts.creation_id);
         creation.average = roundedAverage;
         await creation.save();
