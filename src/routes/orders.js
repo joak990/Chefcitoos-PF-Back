@@ -2,7 +2,7 @@ const server = require('express');
 const router = server.Router();
 
 const {createOrder, orderCreations, orderProducts, getOrderById, updateState } = require('../controllers/orders');
-
+const OrdersDashboard  =  require('../controllers/getadminOrders')  
 router.post('/', async (req, res) => {
     try {
         const { users_id, total_price, state, date, creations, products} = req.body;
@@ -53,5 +53,16 @@ router.put('/:id', async (req, res) => {
         res.status(400).send({ error: error.message })
     }
 })
+
+router.post('/admin', async (req, res) => {
+    try {
+        const Orders = true
+        res.status(200).json(Orders);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+})
+
+
 
 module.exports = router;

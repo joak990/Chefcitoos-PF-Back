@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "db:create": "npx sequelize-cli db:create",
     "db:migrate": "npx sequelize-cli db:migrate"
   },
@@ -27,6 +27,7 @@
     "mercadopago": "^1.5.16",
     "morgan": "^1.10.0",
     "mysql2": "^3.3.3",
+    "nodemailer": "^6.9.3",
     "nodemon": "^2.0.22",
     "pg": "^8.11.0",
     "sequelize": "^6.31.1"

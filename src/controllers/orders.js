@@ -13,7 +13,7 @@ const updateState = async (id, state, confirmation_code) => {
         orderById.state = state;
         orderById.confirmation_code = confirmation_code
         await orderById.save();
-        return `Valor del estado actualizado a: ${value} correctamente`
+        return `Valor del estado actualizado a: ${state} correctamente`
     } catch (error) {
         throw new Error(error);
     }
@@ -81,6 +81,7 @@ const createOrder = async (order) => {
                         isPosted: creation.isPosted,
                         purchased_amount: creation.quantity,
                         isDeleted: creation.isDeleted,
+                        components: creation.components,
                     })
                     creationsArr.push({
                         id: newCreation.id,
@@ -152,5 +153,13 @@ const orderProducts = async (order) => {
         throw new Error(error);
     }
 }
+    
+    const OrdersDashboard = () => {
+        try {
+            res.send(true) ;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 
-module.exports = { createOrder, orderCreations, orderProducts, getOrderById, updateState };
+module.exports = { createOrder, orderCreations, orderProducts, getOrderById, updateState , OrdersDashboard };
