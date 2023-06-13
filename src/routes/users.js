@@ -2,7 +2,7 @@ const server = require('express');
 const router = server.Router();
 
 const createUser = require('../controllers/createUser');
-const deleteUser = require('../controllers/deleteUser');
+const putUser = require('../controllers/putUser');
 const changeIsDeletedValue = require('../controllers/changeIsDeletedValueUser');
 const validateUser = require('../controllers/validateUser');
 const getAllUsers = require('../controllers/getUsers');
@@ -45,11 +45,11 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedUser = await deleteUser(id)
-        res.status(200).send(deletedUser);
+        const ModifiedUser = await putUser(id)
+        res.status(200).send(ModifiedUser);
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
