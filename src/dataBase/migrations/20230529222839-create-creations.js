@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      average: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+      },
       image: {
         type: Sequelize.TEXT,
         allowNull : false

@@ -37,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.TEXT,
     isPosted: DataTypes.BOOLEAN,
     purchased_amount: DataTypes.INTEGER,
-    isDeleted: DataTypes.BOOLEAN
+    isDeleted: DataTypes.BOOLEAN,
+    average: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Creations',
