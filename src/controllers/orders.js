@@ -153,5 +153,13 @@ const orderProducts = async (order) => {
         throw new Error(error);
     }
 }
+    
+    const OrdersDashboard = () => {
+        try {
+            res.send(true) ;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 
-module.exports = { createOrder, orderCreations, orderProducts, getOrderById, updateState };
+module.exports = { createOrder, orderCreations, orderProducts, getOrderById, updateState , OrdersDashboard };
