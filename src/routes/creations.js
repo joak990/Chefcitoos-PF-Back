@@ -5,6 +5,7 @@ const createCreation = require('../controllers/createCreation');
 const deleteCreation = require('../controllers/deleteCreation');
 const getCreations = require('../controllers/getCreations');
 const getCreationsById = require('../controllers/getCreationByUserId')
+const getCreationsTopRated = require('../controllers/getCreationsTopRated')
 
 router.post('/', async (req, res) => {
     try {
@@ -44,6 +45,15 @@ router.get('/myCreations/:id', async (req, res) => {
         res.status(200).send(creationById);
     } catch (error) {
         res.status(400).send({ error: error.message })
+    }
+})
+
+router.get('/topRated', async (req, res) => {
+    try {
+        const creationsTop = await getCreationsTopRated();
+        res.status(200).send(creationsTop);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
     }
 })
 

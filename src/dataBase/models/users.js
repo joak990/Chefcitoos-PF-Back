@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     isDeleted : DataTypes.BOOLEAN,
     address: DataTypes.STRING,
-    root: DataTypes.BOOLEAN
+    root: DataTypes.BOOLEAN,
+    tel: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Users',
