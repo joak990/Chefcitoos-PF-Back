@@ -10,6 +10,7 @@ const editAddressUser = require('../controllers/updateAddressUser')
 const getuserById = require('../controllers/getuserById')
 const updateTypeUser = require('../controllers/updateUserType')
 const changeDataByUserId = require('../controllers/changeDataByUserId');
+const changePasswordByUserId = require('../controllers/changePasswordByUserId');
 
 router.put('/newAddress/:id', async (req, res) => {
     try {
@@ -110,7 +111,18 @@ router.put('/changeData/:id', async (req, res) => {
         const newData = await changeDataByUserId({ name, tel, address, id });
         res.status(200).send(newData);
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(400).send({ error: error.message });
+    }
+})
+
+router.put('/changePassword/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { password } = req.body;
+        const ans = await changePasswordByUserId(id, password);
+        res.status(200).send(ans);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
     }
 })
 
