@@ -6,6 +6,10 @@ const validateUser = async (email, password, type) => {
         const userEmail = await Users.findOne({
             where: { email:email }
         })
+        console.log('::::::', userEmail.dataValues.isDeleted);
+        if (userEmail && userEmail.dataValues.isDeleted) {
+            return userEmail.dataValues.isDeleted
+        }
         if(userEmail){
             if(userEmail.dataValues.password === password){
                 if(type === 'admin'){
