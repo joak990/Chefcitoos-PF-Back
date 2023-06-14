@@ -10,12 +10,16 @@ const createUser = async (user) => {
         const userDb = await Users.findOne({
             where: { email: user.email }
         })
+        if (userDb && userDb.isDeleted) {
+            return userDb.isDeleted
+        }
         // console.log(userDb)
         if (userDb) return {
             id: userDb.id,
             email: userDb.email,
             name: userDb.name,
             root: root,
+            isDeleted : userDb.isDeleted,
             address: userDb.address,
             duplicated: true
         };
