@@ -9,16 +9,18 @@ const getAllUsers = require('../controllers/getUsers');
 const editAddressUser = require('../controllers/updateAddressUser')
 const getuserById = require('../controllers/getuserById')
 const updateTypeUser = require('../controllers/updateUserType')
+const changeDataByUserId = require('../controllers/changeDataByUserId');
+const changePasswordByUserId = require('../controllers/changePasswordByUserId');
 
 router.put('/newAddress/:id', async (req, res) => {
     try {
         const { newAddress } = req.body;
         const { id } = req.params;
-       
+
         const changeValue = await editAddressUser(id, newAddress);
         res.status(200).send(changeValue);
     } catch (error) {
-   
+
         res.status(400).send({ error: error.message });
     }
 })
@@ -30,7 +32,7 @@ router.put('/userType/:id', async (req, res) => {
         const changeValue = await updateTypeUser(id, userType);
         res.status(200).send(changeValue);
     } catch (error) {
-  
+
         res.status(400).send({ error: error.message });
     }
 })
@@ -99,6 +101,28 @@ router.get('/:id', async (req, res) => {
         res.status(200).send(userById);
     } catch (error) {
         res.status(400).send({ error: error.message });
+    }
+})
+
+router.put('/changeData/:id', async (req, res) => {
+    try {
+        const { name, tel, address } = req.body;
+        const { id } = req.params;
+        const newData = await changeDataByUserId({ name, tel, address, id });
+        res.status(200).send(newData);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+})
+
+router.put('/changePassword/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { password } = req.body;
+        const ans = await changePasswordByUserId(id, password);
+        res.status(200).send(ans);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
     }
 })
 
