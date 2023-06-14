@@ -5,9 +5,7 @@ const { Assessments } = require('../dataBase/models');
 
 const putUser = async (id) => {
     try {
-        const userId = await Users.findByPk(id, {
-            attributes: ['id']
-        })
+        const userId = await Users.findByPk(id)
 
         const comments = await Assessments.findAll({
             where : {
@@ -29,7 +27,7 @@ const putUser = async (id) => {
         if(!userId.isDeleted) {
             userId.isDeleted = true
             await userId.save()
-        } else if(userId.isDeleted === true) {
+        } else if(userId.isDeleted) {
             userId.isDeleted = false
             await userId.save()
         }
