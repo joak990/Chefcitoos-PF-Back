@@ -25,7 +25,7 @@ const createAssessments = async (Assmnts) => {
         creation.average = roundedAverage;
         await creation.save();
 
-        console.log("average: ", roundedAverage);
+        // console.log("average: ", roundedAverage);
         return newAssessments.dataValues;
     } catch (error) {
         console.log(error)
