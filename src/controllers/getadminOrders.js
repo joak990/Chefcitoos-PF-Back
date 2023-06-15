@@ -4,9 +4,6 @@ const  { Users } = require('../dataBase/models');
 const OrdersDashboard = async () => {
         try {
             const AllOrders = await Orders.findAll({
-                where : {
-                    state : 'Pagada'
-                },
                 attributes : ['users_id','total_price','state','date'],
                 include : {
                     model : Users,
