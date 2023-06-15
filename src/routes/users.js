@@ -11,6 +11,7 @@ const getuserById = require('../controllers/getuserById')
 const updateTypeUser = require('../controllers/updateUserType')
 const changeDataByUserId = require('../controllers/changeDataByUserId');
 const changePasswordByUserId = require('../controllers/changePasswordByUserId');
+const getFavoritesByUserId = require('../controllers/getFavoritesByUserId');
 
 router.put('/newAddress/:id', async (req, res) => {
     try {
@@ -121,6 +122,16 @@ router.put('/changePassword/:id', async (req, res) => {
         const { password } = req.body;
         const ans = await changePasswordByUserId(id, password);
         res.status(200).send(ans);
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+})
+
+router.get('/favorites/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const favorites = await getFavoritesByUserId(id);
+        res.status(200).send(favorites);
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
