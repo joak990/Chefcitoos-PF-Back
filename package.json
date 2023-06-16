@@ -25,6 +25,7 @@
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
     "mercadopago": "^1.5.16",
+    "moment-timezone": "^0.5.43",
     "morgan": "^1.10.0",
     "mysql2": "^3.3.3",
     "nodemailer": "^6.9.3",
