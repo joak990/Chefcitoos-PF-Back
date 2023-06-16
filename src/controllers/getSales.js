@@ -43,7 +43,7 @@ const getSales = async () => {
         console.log(previousDate)
         return {
             ventas: currentSales,
-            porcentaje: percentaje.toFixed(2)
+            porcentaje: parseFloat(percentaje.toFixed(2))
         };
     } catch (error) {
         throw new Error(error);
