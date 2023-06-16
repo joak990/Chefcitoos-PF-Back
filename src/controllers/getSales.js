@@ -1,11 +1,7 @@
 const { Op } = require('sequelize');
 const { Orders } = require('../dataBase/models');
+const { Users } = require('../dataBase/models');
 const moment = require('moment-timezone');
-
-
-
-// Imprimir las fechas y horas resultantes
-
 
 const getSales = async () => {
     try {
@@ -39,11 +35,38 @@ const getSales = async () => {
             previousSales += sale.total_price
         })
 
-        const percentaje = ((currentSales - previousSales) / previousSales) * 100;
-        console.log(previousDate)
+        const percentajeSale = ((currentSales - previousSales) / previousSales) * 100;
+
+        const currentClients = await Users.findAll({
+            where: {
+                createdAt: {
+                    [Op.gte]: previousDate,
+                    [Op.lt]: currentDate
+                }
+            }
+        })
+        const currentAmount = currentClients.length;
+        
+        const previousClients = await Users.findAll({
+            where: {
+                createdAt: {
+                    [Op.gte]: prePreviousDate,
+                    [Op.lt]: previousDate
+                }
+            }
+        })
+        const previousAmount = previousClients.length;
+
+        const percentajeClient = ((currentAmount - previousAmount) / previousAmount * 100);
         return {
-            ventas: currentSales,
-            porcentaje: parseFloat(percentaje.toFixed(2))
+            ventas: {
+                total: currentSales,
+                porcentaje: parseFloat(percentajeSale.toFixed(2))
+            },
+            clientes: {
+                total: currentAmount,
+                porcentaje: parseFloat(percentajeClient.toFixed(2))
+            }
         };
     } catch (error) {
         throw new Error(error);
