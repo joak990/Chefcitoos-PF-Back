@@ -52,7 +52,6 @@ const createOrder = async (order) => {
         const creationsArr = [];
         const productsArr = [];
 
-        // Creations logic
         const newOrder = await Orders.create({
             users_id: order.users_id,
             total_price: order.total_price,
@@ -65,12 +64,15 @@ const createOrder = async (order) => {
 
                 if (creation.id) {
                     const modifyPurchasedAmount = await Creations.findByPk(creation.id);
+                    const product = await products.findByPk(modifyPurchasedAmount.product_id);                    
+                    product.purchased_amount += creation.quantity;
+                    await product.save();
                     modifyPurchasedAmount.purchased_amount += creation.quantity;
                     await modifyPurchasedAmount.save({ transaction });
                     creationsArr.push({
                         id: modifyPurchasedAmount.dataValues.id,
                         quantity: creation.quantity
-                    })
+                    })                    
                 } else {
                     const newCreation = await createCreation({
                         product_id: creation.product_id,
@@ -83,6 +85,9 @@ const createOrder = async (order) => {
                         isDeleted: creation.isDeleted,
                         components: creation.components,
                     })
+                    const product = await products.findByPk(creation.product_id);
+                    product.purchased_amount += creation.quantity;
+                    product.save();
                     creationsArr.push({
                         id: newCreation.id,
                         quantity: creation.quantity
@@ -92,12 +97,15 @@ const createOrder = async (order) => {
         }
 
         if (order.products && order.products.length > 0) {
-            order.products.forEach(async product => {
+            await Promise.all(order.products.map(async (product) => {
                 productsArr.push({
                     id: product.product_id,
                     quantity: product.quantity
                 });
-            });
+                const prd = await products.findByPk(product.product_id);
+                prd.purchased_amount += product.quantity;
+                prd.save();
+            }))
         }
 
         await Promise.all(creationsArr.map(async el => {

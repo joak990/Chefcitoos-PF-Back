@@ -34,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     customizable: DataTypes.BOOLEAN,
     type_product : DataTypes.STRING,
     isDeleted : DataTypes.BOOLEAN,
-    description : DataTypes.STRING
+    description : DataTypes.STRING,
+    purchased_amount: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'products',
