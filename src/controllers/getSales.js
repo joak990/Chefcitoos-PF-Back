@@ -34,8 +34,12 @@ const getSales = async () => {
         previousSalesArr.forEach(sale => {
             previousSales += sale.total_price
         })
-
-        const percentajeSale = ((currentSales - previousSales) / previousSales) * 100;
+        let percentajeSale = 0;
+        if(previousSales === 0){
+            percentajeSale = 100;
+        } else {
+            percentajeSale = ((currentSales - previousSales) / previousSales) * 100;
+        }
 
         const currentClients = await Users.findAll({
             where: {
@@ -46,6 +50,7 @@ const getSales = async () => {
             }
         })
         const currentAmount = currentClients.length;
+        // console.log("current:: ", currentAmount);
         
         const previousClients = await Users.findAll({
             where: {
@@ -56,8 +61,14 @@ const getSales = async () => {
             }
         })
         const previousAmount = previousClients.length;
-
-        const percentajeClient = ((currentAmount - previousAmount) / previousAmount * 100);
+        // console.log("previous:: ", previousAmount);
+        let percentajeClient = 0;
+        if(previousAmount === 0){
+            percentajeClient = 100
+        } else {
+            percentajeClient = ((currentAmount - previousAmount) / previousAmount * 100);            
+        }
+        console.log("percentaje:: ", percentajeClient)
         return {
             ventas: {
                 total: currentSales,
