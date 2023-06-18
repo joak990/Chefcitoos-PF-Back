@@ -12,12 +12,12 @@ const firebaseConfig = {
   appId: "1:15580983897:web:ef91c2504a317c5916f748",
   measurementId: "G-9QX97S1WSX"
 };
-const getApp = () => {
-    const app = initializeApp(firebaseConfig);
-    // const analytics = getAnalytics(app);
-    return app;
-  };
+// const getApp = () => {
+//     const app = initializeApp(firebaseConfig);
+//     // const analytics = getAnalytics(app);
+//     return app;
+//   };
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-module.exports = getApp;
+module.exports = firebaseConfig;

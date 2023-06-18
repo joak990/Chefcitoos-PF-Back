@@ -8,9 +8,6 @@ const changeIsDeletedValueProduct = require('../controllers/changeIsDeletedValue
 const changePurchasedAmount = require('../controllers/changePurchasedAmount');
 const getDataDashboard = require('../controllers/getDataDashboard');
 
-
-
-
 router.post('/', async (req, res) => {
     try {
         const { name, description, price, image, customizable, type_product, isDeleted, elements } = req.body;
