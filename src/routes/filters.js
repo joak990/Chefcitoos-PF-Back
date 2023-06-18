@@ -16,9 +16,10 @@ router.post('/products', async (req, res) => {
 
 router.post('/creations', async (req, res) => {
     try {
-        const { id, categoria, precioMin, precioMax, precioUnico, precioOrden, ingredientes, ratingOrden } = req.body;
-       
-        const filter = await filtersCreations({ id, categoria, precioMin, precioMax, precioUnico, precioOrden, ingredientes, ratingOrden });
+
+        const { categoria, precioMin, precioMax, precioUnico, precioOrden, ingredientes, ratingOrden } = req.body;
+
+        const filter = await filtersCreations({ categoria, precioMin, precioMax, precioUnico, precioOrden, ingredientes, ratingOrden });
         res.status(200).send(filter);
     } catch (error) {
         res.status(400).send({ error: error.message });
