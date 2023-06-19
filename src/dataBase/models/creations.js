@@ -25,13 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       )
       Creations.belongsTo(models.products, {
         foreignKey: "product_id",
-        as: "products" 
       });
       
       Creations.hasMany(models.Assessments, {
         foreignKey: "creation_id"
       })
-      Creations.belongsToMany(models.Components, { through: models.Creation_component, foreignKey: "component_id"});
+      Creations.belongsToMany(models.Components, { through: models.Creation_component, foreignKey: "creation_id"});
     }
   }
   Creations.init({

@@ -7,58 +7,58 @@ const { Users } = require('../dataBase/models');
 
 
 
-const filtersProducts = async ({ categoria, precioMin, precioMax, precioUnico, precioOrden, disponible, personalizable }) => {
-    try {
-        let filter = {};
+// const filtersProducts = async ({ categoria, precioMin, precioMax, precioUnico, precioOrden, disponible, personalizable }) => {
+//     try {
+//         let filter = {};
 
-        if (categoria) {
-            filter.type_product = categoria;
-        }
+//         if (categoria) {
+//             filter.type_product = categoria;
+//         }
 
-        if (precioMin || precioMax || precioUnico || precioOrden) {
-            filter["$products.price$"] = {};
+//         if (precioMin || precioMax || precioUnico || precioOrden) {
+//             filter["$products.price$"] = {};
 
-            if (precioMin && precioMax) {
-                filter["$products.price$"][Op.between] = [precioMin, precioMax];
-            } else {
-                if (precioMin) {
-                    filter["$products.price$"][Op.gte] = precioMin;
-                }
+//             if (precioMin && precioMax) {
+//                 filter["$products.price$"][Op.between] = [precioMin, precioMax];
+//             } else {
+//                 if (precioMin) {
+//                     filter["$products.price$"][Op.gte] = precioMin;
+//                 }
 
-                if (precioMax) {
-                    filter["$products.price$"][Op.lte] = precioMax;
-                }
+//                 if (precioMax) {
+//                     filter["$products.price$"][Op.lte] = precioMax;
+//                 }
 
-                if (precioUnico) {
-                    filter["$products.price$"][Op.eq] = precioUnico;
-                }
-            }
-        }
+//                 if (precioUnico) {
+//                     filter["$products.price$"][Op.eq] = precioUnico;
+//                 }
+//             }
+//         }
 
-        if (disponible) {
-            filter.isDeleted = disponible;
-        }
+//         if (disponible) {
+//             filter.isDeleted = disponible;
+//         }
 
-        if (personalizable) {
-            filter.customizable = personalizable;
-        }
+//         if (personalizable) {
+//             filter.customizable = personalizable;
+//         }
 
-        const productos = await Creations.findAll({
-            include: [
-                {
-                    model: products,
-                    as: "products",
-                    where: filter,
-                },
-            ],
-            order: [["products", "price", precioOrden || "ASC"]],
-        });
+//         const productos = await Creations.findAll({
+//             include: [
+//                 {
+//                     model: products,
+//                     as: "products",
+//                     where: filter,
+//                 },
+//             ],
+//             order: [["products", "price", precioOrden || "ASC"]],
+//         });
 
-        return productos;
-    } catch (error) {
-        console.log(error);
-    }
-};
+//         return productos;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
 const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUnico, precioOrden, ingredientes, ratingOrden }) => {
     try {
@@ -76,7 +76,7 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             if (precioOrden && ratingOrden){
                 throw new Error ("Solo puedes ordenar la informacion por un tipo de ordenamiento")
             } else if (precioOrden){
-                order = ["products", "price", precioOrden || "ASC"]
+                order = [products, "price", precioOrden || "ASC"]
             } else if (ratingOrden) {
                 order = ["average", ratingOrden || "ASC"]
             }
@@ -120,11 +120,10 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             const creaciones = await Creations.findAll({
                 include: [{
                         model: products,
-                        as: "products",
                     }
                 ],
                 where: creationWhere,
-                order: [order || ["products", "price", precioOrden || "ASC"]],
+                order: [order || [products, "price", precioOrden || "ASC"]],
             });
             return creaciones;
 
@@ -133,7 +132,6 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             const creaciones = await Creations.findAll({
                 include: [{
                         model: products,
-                        as: "products",
                         where: filter,
                     }, {
                         model: Creation_component,
@@ -147,7 +145,7 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
 
                 ],
                 where: creationWhere,
-                order: [order || ["products", "price", precioOrden || "ASC"]],
+                order: [order || [products, "price", precioOrden || "ASC"]],
             });
             return creaciones;
 
@@ -157,7 +155,6 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                 include: [
                     {
                         model: products,
-                        as: "products",
                         where: filter,
                     },
                     {
@@ -172,7 +169,7 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
 
                 ],
                 where: creationWhere,
-                order: [order || ["products", "price", precioOrden || "ASC"]],
+                order: [order || [products, "price", precioOrden || "ASC"]],
             });
             return creaciones;
         } else if (ingredientes && !categoria) {
@@ -190,7 +187,7 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
 
                 ],
                 where: creationWhere,
-                order: [order || ["products", "price", precioOrden || "ASC"]],
+                order: [order || [products, "price", precioOrden || "ASC"]],
             });
 
             return creaciones;
@@ -199,12 +196,11 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                 include: [
                     {
                         model: products,
-                        as: "products",
                         where: filter,
                     },
                 ],
                 where: creationWhere,
-                order: [order || ["products", "price", precioOrden || "ASC"]],
+                order: [order || [products, "price", precioOrden || "ASC"]],
             });
 
             return creaciones;
@@ -214,12 +210,11 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             include: [
                 {
                     model: products,
-                    as: "products",
                     where: filter,
                 },
             ],
             where: creationWhere,
-            order: [order || ["products", "price", precioOrden || "ASC"]],
+            order: [order || [products, "price", precioOrden || "ASC"]],
         });
 
         return creaciones;
@@ -229,4 +224,4 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
     }
 };
 
-module.exports = { filtersProducts, filtersCreations };
+module.exports = { filtersCreations };

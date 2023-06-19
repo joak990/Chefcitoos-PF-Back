@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Products.belongsToMany(models.Creations, {
         through: "Creation_component",
-        foreignKey: "product_id",
-        as: "products" 
+        foreignKey: "product_id"
       });
 
       Products.belongsToMany(models.Orders, {

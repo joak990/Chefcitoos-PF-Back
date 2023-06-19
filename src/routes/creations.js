@@ -33,6 +33,7 @@ router.get('/posts', async (req, res) => {
         const getCreation = await getCreations(filterName)
         res.status(200).send(getCreation);
     } catch (error) {
+        console.log(error)
         res.status(400).send({ error: error.message })
     }
 })
