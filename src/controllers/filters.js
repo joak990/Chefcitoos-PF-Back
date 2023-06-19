@@ -93,8 +93,6 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             }
         }       
 
-        
-
         if (precioMin || precioMax || precioUnico || priceCase) {
 
             let filterPrecio = {};
