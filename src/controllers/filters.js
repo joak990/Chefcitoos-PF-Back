@@ -60,7 +60,7 @@ const { Users } = require('../dataBase/models');
 //     }
 // };
 
-const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUnico, precioOrden, ingredientes, ratingOrden }) => {
+const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUnico, priceCase, precioOrden, ingredientes, ratingOrden }) => {
     try {
 
         let creationWhere = {
@@ -93,8 +93,19 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             }
         }       
 
-        if (precioMin || precioMax || precioUnico) {
+        if (precioMin || precioMax || precioUnico || priceCase) {
+
             let filterPrecio = {};
+
+            if (priceCase) {
+                if (priceCase === 1) {
+                    filterPrecio[Op.between] = [10000, 15000];
+                }  else if (priceCase === 2) {
+                    filterPrecio[Op.between] = [15000, 20000];
+                }  else if (priceCase === 3) {
+                    filterPrecio[Op.between] = [20000, 28000];
+                }
+            }
 
             if (precioMin && precioMax) {
                 filterPrecio[Op.between] = [precioMin, precioMax];
