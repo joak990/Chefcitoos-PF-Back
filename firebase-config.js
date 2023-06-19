@@ -1,7 +1,6 @@
 const { initializeApp } = require('firebase/app');
-// import { getAnalytics } from "firebase/analytics";
-
-// https://firebase.google.com/docs/web/setup#available-libraries
+const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
+const { v4 } = require('uuid');
 
 const firebaseConfig = {
   apiKey: "AIzaSyDzSNb0hWupGp4lZA3Zat_fgFtJyTlKIKc",
@@ -12,12 +11,15 @@ const firebaseConfig = {
   appId: "1:15580983897:web:ef91c2504a317c5916f748",
   measurementId: "G-9QX97S1WSX"
 };
-// const getApp = () => {
-//     const app = initializeApp(firebaseConfig);
-//     // const analytics = getAnalytics(app);
-//     return app;
-//   };
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 
-module.exports = firebaseConfig;
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app)
+
+async function uploadFile(file) {
+  const storageRef = ref(storage, v4());
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+  return url;
+}
+
+module.exports = uploadFile;
