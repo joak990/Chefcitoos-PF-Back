@@ -10,8 +10,8 @@ const getDataDashboard = require('../controllers/getDataDashboard');
 
 router.post('/', async (req, res) => {
     try {
-        const { name, description, price, image, customizable, type_product, isDeleted } = req.body;
-        const newProduct = await createProduct({ name, description, price, image, customizable, type_product, isDeleted })
+        const { name, description, price, image, customizable, type_product, isDeleted, elements } = req.body;
+        const newProduct = await createProduct({ name, description, price, image, customizable, type_product, isDeleted, elements })
         res.status(200).send(newProduct);
     } catch (error) {
         console.log(error)

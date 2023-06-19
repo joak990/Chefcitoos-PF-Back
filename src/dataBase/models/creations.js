@@ -11,9 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-
-      Creations.hasMany(models.Creation_component, { foreignKey: "creation_id" });
-
       Creations.belongsToMany(models.Orders, {
         through: "Creations_orders", 
         foreignKey: "creation_id"
@@ -24,14 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         }
       )
       Creations.belongsTo(models.products, {
-        foreignKey: "product_id",
-        as: "products" 
-      });
-      
+        foreignKey: "product_id"
+      })
       Creations.hasMany(models.Assessments, {
         foreignKey: "creation_id"
       })
-      Creations.belongsToMany(models.Components, { through: models.Creation_component, foreignKey: "component_id"});
+      Creations.belongsToMany(models.Components, { through: "Creation_component", foreignKey: "creation_id" });
     }
   }
   Creations.init({
