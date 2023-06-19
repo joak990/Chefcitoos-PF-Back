@@ -14,7 +14,6 @@ const createProduct = async (product) => {
             type_product: product.type_product,
             isDeleted: product.isDeleted,
             elements: product.elements,
-            image: urlFb
         })
         return newProduct.dataValues;
     } catch (error) {

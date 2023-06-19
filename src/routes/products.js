@@ -7,10 +7,11 @@ const getAllProducts = require('../controllers/getProducts');
 const changeIsDeletedValueProduct = require('../controllers/changeIsDeletedValueProduct');
 const changePurchasedAmount = require('../controllers/changePurchasedAmount');
 const getDataDashboard = require('../controllers/getDataDashboard');
+const modifyProductById = require('../controllers/modifyProductById');
 
 router.post('/', async (req, res) => {
     try {
-        const { name, description, price, image, customizable, type_product, isDeleted, elements } = req.body;
+        const { name, description, price, customizable,image, type_product, isDeleted, elements } = req.body;
         const newProduct = await createProduct({ name, description, price, image, customizable, type_product, isDeleted, elements })
         res.status(200).send(newProduct);
     } catch (error) {
@@ -66,4 +67,14 @@ router.get('/dashboard/total', async (req, res) => {
     }
 })
 
+router.put('/modify/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, description, price, customizable, type_product, isDeleted, elements, image } = req.body;
+        const modifyProduct = await modifyProductById({id, name, description, price, customizable, type_product, isDeleted, elements, image });
+        res.status(200).send(modifyProduct);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+})
 module.exports = router;
