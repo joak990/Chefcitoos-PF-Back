@@ -131,6 +131,10 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
             const creaciones = await Creations.findAll({
                 include: [{
                         model: products,
+                    },  {
+                        model: Users,
+                        as: 'Users',
+                        attributes: ['name']
                     }
                 ],
                 where: creationWhere,
@@ -152,7 +156,11 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                                 [Op.in]: [...ingredientes],
                             }
                         },
-                    }
+                    },  {
+                        model: Users,
+                        as: 'Users',
+                        attributes: ['name']
+                    },
 
                 ],
                 where: creationWhere,
@@ -176,6 +184,10 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                                 [Op.in]: [...ingredientes],
                             }
                         },
+                    },  {
+                        model: Users,
+                        as: 'Users',
+                        attributes: ['name']
                     },
 
                 ],
@@ -194,6 +206,10 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                                 [Op.in]: [...ingredientes],
                             }
                         },
+                    },  {
+                        model: Users,
+                        as: 'Users',
+                        attributes: ['name']
                     },
 
                 ],
@@ -208,6 +224,10 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                     {
                         model: products,
                         where: filter,
+                    },  {
+                        model: Users,
+                        as: 'Users',
+                        attributes: ['name']
                     },
                 ],
                 where: creationWhere,
@@ -222,6 +242,10 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
                 {
                     model: products,
                     where: filter,
+                },  {
+                    model: Users,
+                    as: 'Users',
+                    attributes: ['name']
                 },
             ],
             where: creationWhere,

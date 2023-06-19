@@ -44,6 +44,7 @@ router.get('/myCreations/:id', async (req, res) => {
         const creationById = await getCreationsById(id, type, filterName)
         res.status(200).send(creationById);
     } catch (error) {
+        console.log(error)
         res.status(400).send({ error: error.message })
     }
 })
