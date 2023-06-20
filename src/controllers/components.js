@@ -80,9 +80,13 @@ const addComponent = async ( req, res ) => {
 }
 
 const getAllComponent = async ( req, res ) => {
+
+  let { id } = req.params;
+
   try {
     const result = await Components.findAll({
       where : {
+        component_categ_id: id,
         isDeleted : false
       },
     },

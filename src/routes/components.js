@@ -25,7 +25,7 @@ router.post("/", addComponent);
 
 router.put('/:id', excludeComponent)
 
-router.get('/', getAllComponent)
+router.get('/:id', getAllComponent)
 
 router.delete('/', removeComponent)
 
