@@ -4,14 +4,14 @@ const  { Users } = require('../dataBase/models');
 const OrdersDashboard = async () => {
         try {
             const AllOrders = await Orders.findAll({
-                attributes : ['users_id','total_price','state','date'],
+                attributes : ['id', 'users_id','total_price','state','date'],
                 include : {
                     model : Users,
                     attributes: ['name']
-                }
+                },
+                order: [['date', 'DESC']]
             })
             
-
             return AllOrders
         } catch (error) {
             throw new Error(error);

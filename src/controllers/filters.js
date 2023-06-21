@@ -259,4 +259,4 @@ const filtersCreations = async ({ id, categoria, precioMin, precioMax, precioUni
     }
 };
 
-module.exports = { filtersCreations };
+module.exports = { filtersCreations }; 
