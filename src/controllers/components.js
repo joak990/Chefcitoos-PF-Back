@@ -80,10 +80,24 @@ const addComponent = async ( req, res ) => {
 }
 
 const getAllComponent = async ( req, res ) => {
+  try { 
+    const result = await Components.findAll({
+      where : {
+        isDeleted : false
+      },
+    },
+    )
+    res.json(result).status(200)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getAllComponentById = async ( req, res ) => {
 
   let { id } = req.params;
 
-  try {
+  try { 
     const result = await Components.findAll({
       where : {
         component_categ_id: id,
@@ -91,7 +105,6 @@ const getAllComponent = async ( req, res ) => {
       },
     },
     )
-
     res.json(result).status(200)
   } catch (error) {
     console.log(error)
@@ -143,5 +156,6 @@ module.exports = {
   addComponent,
   getAllComponent,
   excludeComponent,
-  removeComponent
+  removeComponent,
+  getAllComponentById
 };
