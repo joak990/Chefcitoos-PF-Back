@@ -7,7 +7,8 @@ const {
   addComponent,
   getAllComponent,
   excludeComponent,
-  removeComponent
+  removeComponent,
+  getAllComponentById
 } = require("../controllers/components");
 
 // Components_categ entity
@@ -25,7 +26,9 @@ router.post("/", addComponent);
 
 router.put('/:id', excludeComponent)
 
-router.get('/:id', getAllComponent)
+router.get('/', getAllComponent)
+
+router.get('/:id', getAllComponentById)
 
 router.delete('/', removeComponent)
 
